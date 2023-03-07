@@ -5,8 +5,16 @@ from myapp1.models import OrderItem
 class OrderItemForm(forms.ModelForm):
     class Meta:
         model = OrderItem
-        fields = ['ordered_item', 'ordered_by', 'no_of_order']
-        labels = {'ordered_item': 'Item', 'ordered_by': 'Client Name', 'no_of_order': 'Quantity'}
+        fields = [
+            'ordered_item',
+            'ordered_by',
+            'no_of_order'
+        ]
+        labels = {
+            'ordered_item': 'Item',
+            'ordered_by': 'Client Name',
+            'no_of_order': 'Quantity'
+        }
         widgets = {'ordered_by': forms.RadioSelect}
 
 
