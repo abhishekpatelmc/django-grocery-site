@@ -1,0 +1,29 @@
+body{
+    margin: 30px;
+}
+
+h1{
+    text-align: center;
+    font-size: xx-large;
+}
+
+h1,h2{
+   color: darkslategrey;
+}
+
+a{
+    color: darkcyan;
+}
+
+.bottombar{
+    text-align: center;
+}
+
+.hbar1 {
+    display: inline;
+    margin: 15px;
+    text-align: center;
+    text-decoration: none;
+}
+
+

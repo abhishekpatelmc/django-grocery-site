@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% extends 'myapp1/base.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block body_block %}
+  <h2>Items</h2>
+  <ul>
+  {% for item in itemlist %}
+    <li>{{ item.name }} - ${{ item.price }}</li>
+  {% endfor %}
+  </ul>
+{#  <a href="{% url 'placeorder' %}">Place an order</a>#}
+{% endblock %}
+
+</body>
+
+
+
+
