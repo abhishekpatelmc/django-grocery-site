@@ -1,5 +1,5 @@
 from django import forms
-from myapp1.models import OrderItem
+from .models import OrderItem
 
 
 class OrderItemForm(forms.ModelForm):

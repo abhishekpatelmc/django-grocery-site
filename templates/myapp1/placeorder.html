@@ -7,8 +7,23 @@
 </head>
 <body>
 {% block body_block %}
-  <h2>Place an order</h2>
-  <p>You can place your order here.</p>
+
+    <h2>Items</h2>
+    <ul>
+        {% for item in itemlist %}
+            <li>{{ item.name }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Place an order</h2>
+    <p>You can place your order here.</p>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit">
+    </form>
+
 {% endblock %}
 </body>
 </html>

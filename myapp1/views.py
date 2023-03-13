@@ -1,4 +1,6 @@
 from django.http import HttpResponse
+
+from .forms import OrderItemForm
 from .models import Type, Item
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import View
@@ -39,7 +41,26 @@ def items(request):
 
 
 def placeorder(request):
-    return render(request, 'myapp1/placeorder.html')
+    msg = ""
+    itemlist = Item.objects.all()
+    if request.method == 'POST':
+        form = OrderItemForm(request.POST)
+        if form.is_valid():
+            order = form.save(commit=False)
+            if order.ordered_item <= int(order.item.stock):
+                order.save()
+                msg = 'Your order has been placed successfully.'
+            else:
+                msg = 'We do not have sufficient stock to fill your order.'
+                return render(request, 'myapp1/order_response.html', {'msg': msg})
+    else:
+        form = OrderItemForm()
+    return render(request, 'myapp1/placeorder.html', {'form': form, 'msg': msg, 'itemlist': itemlist})
+
+
+# def placeorder(request):
+#     itemlist = Item.objects.all()
+#     return render(request, 'myapp1/placeorder.html', {'itemlist':itemlist})
 
 
 # def about(request,year,month):
