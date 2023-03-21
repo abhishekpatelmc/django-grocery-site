@@ -1,0 +1,17 @@
+{% extends 'myapp1/base.html' %}
+
+{% block body_block %}
+    <h1>{{ item.name }}</h1>
+    <p>Number of people interested: {{ item.interested.count }}</p>
+    <p>Price: {{ item.price }}</p>
+
+    {% if item.available %}
+        <form method="post" >
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Submit">
+        </form>
+    {% else %}
+        <p>Sorry, this item is not currently available.</p>
+    {% endif %}
+{% endblock %}

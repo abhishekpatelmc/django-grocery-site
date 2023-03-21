@@ -1,22 +1,21 @@
+from django.contrib import admin
 from django.urls import path
-from myapp1 import views
+from . import views
 
 app_name = 'myapp1'
-# urlpatterns = [
-#     path('admin/', admin.site.urls),
-#     path('', views.index, name='index'),
-#     path("typeList/",views.type_list,name='typeList'),
-#     path("typelistcbv/",views.TypeListView.as_view(),name="typelistcbv"),
-#     path('myapp1/<int:type_no>',views.detail,name='detail'),
-#     path('myapp1/about/<int:year>/<int:month>/', views.about, name='about'),
-#     # path('', include('myapp1.urls')),
-# ]
-
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('about', views.about, name='about'),
-    path('detail/<str:type_no>', views.detail, name='detail'),
-    path('items', views.items, name='items'),
-    path('placeorder', views.placeorder, name='placeorder')
+    path('', views.user_login, name='user_login'),
+    path('myorder/', views.myorder, name='myorder'),
+    path('user_logout/', views.user_logout, name='user_logout'),
+    path('index/', views.index, name='index'),
+    path('about/', views.about, name='about'),
+    path('detail/<str:type_no>/', views.detail, name='detail'),
+    path('my_fbv/', views.my_fbv, name='my_fbv'),
+    path('my_cbv/', views.MyCBV.as_view(), name='my_cbv'),
+    path('items/', views.items, name='items'),
+    path('items/<int:item_id>/', views.itemdetail, name='itemdetail'),
+    path('placeorder/', views.placeorder, name='placeorder')
+
+
     # path('', include('myapp1.urls')),
 ]

@@ -21,6 +21,7 @@ class Item(models.Model):
 
     def topup(self):
         self.stock += 200
+        self.save()
 
     def __str__(self):
         return self.name
@@ -48,21 +49,26 @@ class Client(User):
 class OrderItem(models.Model):
     order_status = [
         ('0', 'cancelled'),
-        ('1', 'placed_order'),
+        ('1', 'Successful'),
         ('2', 'shipped_order'),
         ('3', 'deliverd_order')]
     ordered_item = models.ForeignKey(Item, related_name='orderedItem', on_delete=models.CASCADE)
     ordered_by = models.ForeignKey(Client, related_name='orderedBy', on_delete=models.CASCADE)
     no_of_order = models.PositiveIntegerField()
     status = models.CharField(max_length=2, default='1', choices=order_status)
-    date = models.DateField()
+    date = models.DateField(auto_now=True)
 
     def __str__(self):
-        return self.ordered_item
+        return f"{self.ordered_by.first_name} order {self.ordered_item} (quantity={self.no_of_order})"
 
     def total_price(self):
-        sum([item.total_cost for item in Item.objects.filter(name=self.ordered_item)])
-        # return sum[(self.ordered_item.price * self.no_of_order)]
+        return self.no_of_order * self.ordered_item.price
+    # def __str__(self):
+    #     return self.ordered_item
+    #
+    # # def total_price(self):
+    #     sum([item.total_cost for item in Item.objects.filter(name=self.ordered_item)])
+    #     # return sum[(self.ordered_item.price * self.no_of_order)]
 
 
 class Description(models.Model):

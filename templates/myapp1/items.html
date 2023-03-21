@@ -1,22 +1,24 @@
-<!DOCTYPE html>
 {% extends 'myapp1/base.html' %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 {% block body_block %}
-  <h2>Items</h2>
-  <ul>
-  {% for item in itemlist %}
-    <li>{{ item.name }} - ${{ item.price }}</li>
-  {% endfor %}
-  </ul>
-{#  <a href="{% url 'placeorder' %}">Place an order</a>#}
-{% endblock %}
+     {% if itemlist %}
+         <h2>Available Items</h2>
 
-</body>
+            {% for item in itemlist %}
+            <li><a href="{% url 'myapp1:itemdetail' item.id %}">{{ item.name }} - {{ item.price }}
+                ({% if item.available %}
+                    availabe
+                {% else %}
+                    not available
+                {% endif %})
+            </a></li>
+            {% endfor %}
+
+     {% else %}
+    <strong> None of the items is available! </strong>
+     {% endif %}
+
+<p><a href="{% url 'myapp1:placeorder' %}">Place Order</a></p>
+{% endblock %}
 
 
 
